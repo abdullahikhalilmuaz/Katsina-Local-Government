@@ -6,7 +6,7 @@ import PrimaryHome from "./pages/PrimaryHome";
 import PrimaryRegister from "./pages/PrimaryRegister";
 import SecondaryHome from "./pages/SecondaryHome";
 import SecondaryRegister from "./pages/SecondaryRegister";
-import "./app.css";
+import "./App.css";
 import Notfoundpage from "./pages/Notfoundpage";
 import ViewStaff from "./pages/ViewStaff";
 
