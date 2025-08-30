@@ -8,7 +8,7 @@ import FileTracking from "../components/FileTracking";
 import FileForm from "../components/FileForm";
 import Reports from "../components/Reports";
 
-export default function LandingPage() {
+export default function LandingPage({ sideme, setSideme }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarContent, setSideBarContent] = useState(null);
   const navigate = useNavigate();
@@ -26,6 +26,8 @@ export default function LandingPage() {
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
         setSideBarContent={setSideBarContent}
+        setSideme={setSideme}
+        sideme={sideme}
       />
       <div className="content-area">
         {sidebarContent === "dashboard" ? (

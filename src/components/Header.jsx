@@ -2,30 +2,31 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/header.css";
 import coatOfArms from "../assets/coat-of-arms.png";
 
-export default function Header({
-  setOpenState,
-  openState,
-  sidebarOpen,
-  setSidebarOpen, // ✅ added
-}) {
+export default function Header({ setOpenState, openState, setSideme, sideme }) {
   const navigate = useNavigate();
   const location = useLocation();
 
   const userData = localStorage.getItem("userData");
   const adminData = localStorage.getItem("adminData");
 
+  // Toggle sidebar
+  const handleSidebar = () => {
+    setSideme(!sideme); // toggles true/false
+  };
+
+  // User/Admin toggle or logout
   const handleToggle = () => {
     if (userData || adminData) {
-      // Logout flow for both user & admin
+      // Logout flow
       localStorage.removeItem("userData");
       localStorage.removeItem("adminData");
       localStorage.removeItem("viewStaffData");
       localStorage.removeItem("printStaffData");
 
       navigate("/secondary-register");
-      window.location.reload(); // refresh to clear state
+      window.location.reload();
     } else {
-      // Toggle Admin/User (when no one is logged in)
+      // Toggle Admin/User when no one is logged in
       if (openState) {
         setOpenState(false);
         if (location.pathname.includes("primary-register")) {
@@ -43,10 +44,10 @@ export default function Header({
   return (
     <div className="main-header">
       <div className="menu-logo-title">
-        {/* ✅ Sidebar toggle button */}
+        {/* Sidebar toggle button */}
         <div
           className="menu-icon"
-          onClick={() => setSidebarOpen(!sidebarOpen)}
+          onClick={handleSidebar}
           style={{ cursor: "pointer" }}
         >
           <svg

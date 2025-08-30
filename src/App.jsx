@@ -13,11 +13,22 @@ import ViewStaff from "./pages/ViewStaff";
 export default function App() {
   const [openState, setOpenState] = useState(false);
   const [views, setViews] = useState(false);
-
+  const [sidebarOpen, setSidebarOpen] = useState(false); // Add sidebar state
+  const [sideBarContent, setSideBarContent] = useState("dashboard"); // Add sidebar content state
+  const [sideme, setSideme] = useState(false);
   return (
     <>
       <BrowserRouter>
-        {!views && <Header setOpenState={setOpenState} openState={openState} />}
+        {!views && (
+          <Header
+            setOpenState={setOpenState}
+            openState={openState}
+            sidebarOpen={sidebarOpen} // Pass sidebar state
+            setSidebarOpen={setSidebarOpen} // Pass setter function
+            sideme={sideme}
+            setSideme={setSideme}
+          />
+        )}
         <Routes>
           {/* Not found route */}
           <Route path="*" element={<Notfoundpage />} />
@@ -29,7 +40,10 @@ export default function App() {
           {/* if localstorage, / will be home, else will be landing page. and they will be two homw, admin home as primary and user as secondary home */}
 
           {/* ADMIN part, home below */}
-          <Route path="/primary-home" element={<PrimaryHome />} />
+          <Route
+            path="/primary-home"
+            element={<PrimaryHome sideme={sideme} setSideme={setSideme} />}
+          />
           {/* primary || admin register */}
           <Route path="/primary-register" element={<PrimaryRegister />} />
 
@@ -43,7 +57,7 @@ export default function App() {
             element={<ViewStaff setViews={setViews} />}
           />
         </Routes>
-        {console.log(views)}
+        
       </BrowserRouter>
     </>
   );

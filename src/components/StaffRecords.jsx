@@ -124,14 +124,6 @@ export default function StaffRecords() {
     <div>
       <div className="page-header">
         <h1 className="page-title">Staff Records</h1>
-        <button
-          className="btn btn-primary"
-          style={{ padding: "8px 15px", margin: "10px auto" }}
-          onClick={() => (window.location.href = "/add-staff")}
-        >
-          Add New Staff{" "}
-          <span style={{ fontWeight: "bolder", fontSize: "16px" }}>+</span>
-        </button>
       </div>
 
       {message.text && (

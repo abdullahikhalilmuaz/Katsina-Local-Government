@@ -1,50 +1,27 @@
 import { NavLink } from "react-router-dom";
 import "../styles/sidebar.css";
 
-export default function Sidebar({
-  sidebarOpen,
-  setSidebarOpen,
-  setSideBarContent,
-}) {
-  const handleDashboard = () => {
-    setSideBarContent("dashboard");
-  };
-  const handleStaffRecord = () => {
-    setSideBarContent("staff-record");
-  };
-  const handleFileTracking = () => {
-    setSideBarContent("file-tracking");
-  };
-  const handleReports = () => {
-    setSideBarContent("reports");
-  };
-  const handleNewFile = () => {
-    setSideBarContent("new-file");
-  };
+export default function Sidebar({ setSideBarContent, sideme }) {
+  const handleDashboard = () => setSideBarContent("dashboard");
+  const handleStaffRecord = () => setSideBarContent("staff-record");
+  const handleFileTracking = () => setSideBarContent("file-tracking");
+  const handleReports = () => setSideBarContent("reports");
+  const handleNewFile = () => setSideBarContent("new-file");
+
   return (
     <>
+      {/* Overlay */}
       <div
-        className={`sidebar-overlay ${sidebarOpen ? "active" : ""}`}
-        onClick={() => setSidebarOpen(false)}
+        className={`sidebar-overlay ${sideme ? "active" : ""}`}
+        onClick={() => console.log("Overlay clicked")}
       />
-      <nav className={`sidebar ${sidebarOpen ? "active" : ""}`}>
+
+      {/* Sidebar */}
+      <nav className={`sidebar ${sideme ? "active" : ""}`}>
         <div className="sidebar-header">
           <h3>Menu</h3>
         </div>
-        <ul className="sidebar-menu">
-          {/* {menuItems.map((item, index) => (
-            <li key={index}>
-              <NavLink
-                className="sidebar-item"
-                activeclassname="active"
-                onClick={() => setSidebarOpen(false)}
-              >
-                <span className="sidebar-icon">{item.icon}</span>
-                <span className="sidebar-label">{item.label}</span>
-              </NavLink>
-            </li>
-          ))} */}
-
+        <ul className="sidebar-menu" >
           <li>
             <NavLink className="sidebar-item" onClick={handleDashboard}>
               <span className="sidebar-icon">

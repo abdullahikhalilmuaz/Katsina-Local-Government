@@ -170,3 +170,14 @@
   margin: 0px 10px;
   border-radius: 50%;
 }
+
+/* Hide menu toggle on desktop */
+.menu-icon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+}
