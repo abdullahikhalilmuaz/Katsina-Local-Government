@@ -1,0 +1,132 @@
+:root {
+  --primary-color: rgb(0, 102, 0);
+  --secondary-color: rgb(255, 204, 0);
+  --background-color: #f9fafb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --text-color: #333;
+  --accent-color: rgb(0, 76, 153);
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+}
+
+.primary-login-main-container-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
+  margin: 80px auto;
+  padding: 40px 30px;
+  background: white;
+  box-shadow: 0 8px 25px var(--shadow-color);
+  border-radius: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: transform 0.2s ease-in-out;
+}
+
+.primary-login-main-container-form:hover {
+  transform: translateY(-3px);
+}
+
+.primary-login-main-container-form h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.primary-login-main-container-form form {
+  width: 100%;
+}
+
+.primary-login-main-container-form form input {
+  width: 100%;
+  margin: 12px 0;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.primary-login-main-container-form form input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 102, 0, 0.2);
+}
+
+.primary-login-main-container-form form button {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.primary-login-main-container-form form input[type="submit"]:hover {
+  background-color: #005500;
+}
+
+.primary-login-main-container-form button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  background: #f0f0f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primary-login-main-container-form button:hover {
+  background: #e2e2e2;
+}
+
+.primary-login-main-container-form p {
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.primary-login-main-container-form p.success {
+  color: var(--success-color);
+}
+
+.primary-login-main-container-form p.error {
+  color: var(--danger-color);
+}
+
+@media only screen and (max-width: 660px) {
+  .primary-login-main-container-form {
+    width: 90%;
+    margin: 50px auto;
+    padding: 30px 20px;
+  }
+}
+
+/* Error & success messages */
+.error-box,
+.success-box {
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.error-box {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+}
+
+.success-box {
+  background-color: rgba(0, 128, 0, 0.1);
+  color: var(--success-color);
+  border: 1px solid var(--success-color);
+}
+
+/* Disabled button (loading state) */
+.primary-login-main-container-form form button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

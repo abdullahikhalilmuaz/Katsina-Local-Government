@@ -1,0 +1,149 @@
+.user-main-home-container {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.user-main-home-container .user-main-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: max-content;
+  height: auto;
+  overflow: auto;
+  padding-bottom: 150px;
+  box-sizing: border-box;
+}
+
+.user-main-home-container .user-main-content-container div {
+  color: red;
+}
+
+.user-main-home-container .user-main-content-container .div1 {
+  margin-bottom: 100px;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 70px; /* Header height */
+  left: 0;
+  width: 250px;
+  height: calc(100vh - 70px);
+  background-color: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 998;
+  overflow-y: auto;
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 997;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header h3 {
+  color: var(--primary-color);
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 10px 0;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+.sidebar-item:hover {
+  background-color: rgba(0, 102, 0, 0.05);
+}
+
+.sidebar-item.active {
+  background-color: rgba(0, 102, 0, 0.1);
+  border-left: 4px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.sidebar-icon {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.sidebar-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Password Form Styles */
+.password-form {
+  width: 100%;
+  max-width: 600px;
+}
+
+.password-form h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ecf0f1;
+  margin-bottom: 20px;
+}
+/* Responsive Styles */
+@media (min-width: 992px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 280px;
+  }
+}

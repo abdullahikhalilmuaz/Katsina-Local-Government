@@ -1,0 +1,110 @@
+:root {
+  --primary-color: rgb(0, 102, 0);
+  --secondary-color: rgb(255, 204, 0);
+  --background-color: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --text-color: #333333;
+  --accent-color: rgb(0, 76, 153);
+  --success-color: rgb(0, 128, 0);
+  --warning-color: rgb(255, 165, 0);
+  --danger-color: rgb(220, 53, 69);
+}
+
+.primary-signup-main-container-form {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  margin: 20px auto;
+  padding: 30px 25px;
+  background: var(--background-color);
+  box-shadow: 0 4px 20px var(--shadow-color);
+  border-radius: 12px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: transform 0.2s ease;
+}
+
+.primary-signup-main-container-form:hover {
+  transform: translateY(-3px);
+}
+
+.primary-signup-main-container-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+.primary-signup-main-container-form form {
+  width: 100%;
+}
+
+.primary-signup-main-container-form form input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-signup-main-container-form form input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 6px rgba(0, 102, 0, 0.3);
+  outline: none;
+}
+
+.primary-signup-main-container-form form input::placeholder {
+  color: #777;
+  font-size: 13px;
+}
+
+.primary-signup-main-container-form form button {
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+.primary-signup-main-container-form form input[type="submit"]:hover {
+  background-color: #005500;
+  transform: scale(1.02);
+}
+
+.primary-signup-main-container-form button {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.primary-signup-main-container-form button:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.01);
+}
+
+.primary-signup-main-container-form p {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+.primary-signup-main-container-form p.success {
+  color: var(--success-color);
+}
+.primary-signup-main-container-form p.error {
+  color: var(--danger-color);
+}
+
+@media only screen and (max-width: 660px) {
+  .primary-signup-main-container-form {
+    width: 90%;
+    margin-top: 20px;
+  }
+}

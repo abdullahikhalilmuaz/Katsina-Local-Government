@@ -1,0 +1,10 @@
+.edit-main-container {
+  position: absolute;
+  top: 80px;
+  width: 40%;
+  height: auto;
+  background-color: orange;
+  /* margin: 0px 30%; */
+  transform: translate(50%, -50%);
+  z-index: 1000;
+}

@@ -1,0 +1,138 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 15px;
+  color: #444;
+  font-size: 1.2rem;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #ddd;
+  border-top: 6px solid #007bff; /* Primary blue */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+
+
+
+.user-home {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.welcome-banner {
+  background: linear-gradient(to right, #7b1c1c, #d32f2f);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.welcome-banner .title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.welcome-banner .subtitle {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.stat-card {
+  padding: 1rem;
+  border-radius: 0.8rem;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.stat-card.blue { background: #1976d2; }
+.stat-card.green { background: #388e3c; }
+.stat-card.purple { background: #7b1fa2; }
+.stat-card.orange { background: #f57c00; }
+
+.recent-activities {
+  background: white;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.recent-activities h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.activity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-item .name {
+  font-weight: 500;
+}
+
+.activity-item .action {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.status {
+  padding: 0.3rem 0.8rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status.returned { background: #e8f5e9; color: #2e7d32; }
+.status.collected { background: #fff3e0; color: #ef6c00; }
+.status.pending { background: #eeeeee; color: #424242; }
+
+.quick-links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.quick-link {
+  background: white;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  border: 1px solid #ddd;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: background 0.2s ease;
+}
+
+.quick-link:hover {
+  background: #f9f9f9;
+}
