@@ -33,17 +33,20 @@ export default function SecondarySignup({ setPages }) {
 
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/api/users/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstname: form.firstname,
-          lastname: form.lastname,
-          username: form.username,
-          email: form.email,
-          password: form.password,
-        }),
-      });
+      const res = await fetch(
+        "https://katsina-local-government-server-base-url.onrender.comapi/users/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            firstname: form.firstname,
+            lastname: form.lastname,
+            username: form.username,
+            email: form.email,
+            password: form.password,
+          }),
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) {

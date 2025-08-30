@@ -16,7 +16,9 @@ export default function StaffRecords() {
   }, []);
 
   const fetchStaffRecords = () => {
-    fetch("http://localhost:3000/api/staff")
+    fetch(
+      "https://katsina-local-government-server-base-url.onrender.comapi/staff"
+    )
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch staff records");
@@ -44,7 +46,7 @@ export default function StaffRecords() {
   const handleSave = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/staff/${editingStaff._id}`, // ✅ FIXED
+        `https://katsina-local-government-server-base-url.onrender.comapi/staff/${editingStaff._id}`, // ✅ FIXED
         {
           method: "PUT",
           headers: {

@@ -42,7 +42,7 @@ export default function Profile() {
   const fetchUserData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/profile/${userId}`
+        `https://katsina-local-government-server-base-url.onrender.comapi/profile/${userId}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch user data");
@@ -83,7 +83,7 @@ export default function Profile() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/profile/${userId}`,
+        `https://katsina-local-government-server-base-url.onrender.comapi/profile/${userId}`,
         {
           method: "PUT",
           headers: {
@@ -136,7 +136,7 @@ export default function Profile() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/profile/${userId}/change-password`,
+        `https://katsina-local-government-server-base-url.onrender.comapi/profile/${userId}/change-password`,
         {
           method: "POST",
           headers: {

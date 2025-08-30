@@ -23,20 +23,22 @@ export default function Home() {
 
       // Fetch dashboard stats
       const statsResponse = await fetch(
-        "http://localhost:3000/api/dashboard/stats"
+        "https://katsina-local-government-server-base-url.onrender.comapi/dashboard/stats"
       );
       const statsData = await statsResponse.json();
       setStats(statsData);
 
       // Fetch recent activities
       const activitiesResponse = await fetch(
-        "http://localhost:3000/api/dashboard/recent"
+        "https://katsina-local-government-server-base-url.onrender.comapi/dashboard/recent"
       );
       const activitiesData = await activitiesResponse.json();
       setRecentActivities(activitiesData.activities);
 
       // Fetch department reports
-      const reportsResponse = await fetch("http://localhost:3000/api/reports");
+      const reportsResponse = await fetch(
+        "https://katsina-local-government-server-base-url.onrender.comapi/reports"
+      );
       const reportsData = await reportsResponse.json();
       setDepartmentReports(reportsData.departments);
     } catch (error) {
