@@ -1,16 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SecondaryHomeBottomNavBar from "../components/SecondaryHomeBottomNavBar";
 import "../styles/userhome.css";
 import Home from "../components/Home";
 import Profile from "../components/Profile";
+import Collab from "../components/Collab";
 
 export default function LandingPage() {
   const [screens, setScreens] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    if (!userData) {
+      navigate("/secondary-register"); // 🚀 redirect if not logged in
+    }
+  }, [navigate]);
 
   return (
     <div className="user-main-home-container">
       <div className="user-main-content-container">
-        <div>
+        <div className="contnet">
           {screens === null ? (
             <Home />
           ) : screens === "home" ? (
@@ -18,9 +28,7 @@ export default function LandingPage() {
           ) : screens === "profile" ? (
             <Profile />
           ) : screens === "collab" ? (
-            "collab"
-          ) : screens === "notification" ? (
-            "notification"
+            <Collab />
           ) : (
             <Home />
           )}

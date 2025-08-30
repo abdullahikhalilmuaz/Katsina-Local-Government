@@ -1,25 +1,40 @@
-import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/header.css";
 import coatOfArms from "../assets/coat-of-arms.png";
 
 export default function Header({ setOpenState, openState }) {
-  const handleOpenState = () => {
-    if (window.location.href === "http://localhost:5173/secondary-register") {
-      window.location.href === "http://localhost:5173/primary-register";
-    } else if (
-      window.location.href === "http://localhost:5173/primary-register"
-    ) {
-      window.location.href === "http://localhost:5173/secondary-register";
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const userData = localStorage.getItem("userData");
+  const adminData = localStorage.getItem("adminData");
+
+  const handleToggle = () => {
+    if (userData || adminData) {
+      // Logout flow for both user & admin
+      localStorage.removeItem("userData");
+      localStorage.removeItem("adminData");
+      localStorage.removeItem("viewStaffData");
+      localStorage.removeItem("printStaffData");
+
+      navigate("/secondary-register");
+      window.location.reload(); // refresh to clear state
+    } else {
+      // Toggle Admin/User (when no one is logged in)
+      if (openState) {
+        setOpenState(false);
+        if (location.pathname.includes("primary-register")) {
+          navigate("/secondary-register");
+        }
+      } else {
+        setOpenState(true);
+        if (location.pathname.includes("secondary-register")) {
+          navigate("/primary-register");
+        }
+      }
     }
   };
-  let user;
 
-  function setAdmin() {
-    window.location.href = "secondary-register";
-  }
-  function setUser() {
-    window.location.href = "primary-register";
-  }
   return (
     <div className="main-header">
       <div className="menu-logo-title">
@@ -84,27 +99,24 @@ export default function Header({ setOpenState, openState }) {
         </div>
       </div>
 
+      {/* User/Admin Toggle OR Logout */}
       <div
         className="header-actions"
-        style={{ display: "flex", flexDirection: "column" }}
-        onClick={handleOpenState}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          cursor: "pointer",
+          alignItems: "flex-end",
+        }}
+        onClick={handleToggle}
       >
         <div className="user-profile">
           <span className="user-avatar"></span>
-          <span>{`${openState ? "Admin" : "Users"}`}</span>
+          <span>
+            {userData || adminData ? "Logout" : openState ? "Admin" : "User"}
+          </span>
         </div>
       </div>
-
-      {/* <div
-        className="header-actions"
-        style={{ display: "flex", flexDirection: "column" }}
-      >
-        <div className="user-profile">
-          <span className="user-avatar">AD</span>
-          <span className="user-name">Admin User</span>
-        </div>
-        <div className="logout-toggle">logout</div>
-      </div> */}
     </div>
   );
 }

@@ -103,30 +103,7 @@ export default function SecondaryHomeBottomNavBar({ setScreens }) {
         Collab
       </div>
 
-      {/* Notification */}
-      <div onClick={handleNotification}>
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M18 8C18 5.61305 17.0518 3.32387 15.364 1.63604C13.6761 -0.0517847 11.3869 -1 9  -1C6.61305 -1 4.32387 -0.0517847 2.63604 1.63604C0.948211 3.32387 0 5.61305 0 8V14L-2 16V17H20V16L18 14V8Z"
-            transform="translate(2 3)"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M12 22C13.1046 22 14 21.1046 14 20H10C10 21.1046 10.8954 22 12 22Z"
-            fill="currentColor"
-          />
-        </svg>
-        Notification
-      </div>
+    
     </div>
   );
 }

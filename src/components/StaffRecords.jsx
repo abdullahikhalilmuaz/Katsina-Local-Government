@@ -9,16 +9,20 @@ export default function StaffRecords() {
   const [editingStaff, setEditingStaff] = useState(null);
   const [editForm, setEditForm] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+  const [message, setMessage] = useState({ text: "", type: "" });
 
   useEffect(() => {
     fetchStaffRecords();
   }, []);
 
   const fetchStaffRecords = () => {
-    fetch(
-      "https://katsina-local-government-server-base-url.onrender.com/api/staff"
-    )
-      .then((res) => res.json())
+    fetch("http://localhost:3000/api/staff")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch staff records");
+        }
+        return res.json();
+      })
       .then((data) => {
         setStaffRecords(data);
         setLoading(false);
@@ -26,6 +30,8 @@ export default function StaffRecords() {
       .catch((err) => {
         console.error("Error fetching staff:", err);
         setLoading(false);
+        setMessage({ text: "Failed to load staff records", type: "error" });
+        setTimeout(() => setMessage({ text: "", type: "" }), 3000);
       });
   };
 
@@ -38,7 +44,7 @@ export default function StaffRecords() {
   const handleSave = async () => {
     try {
       const response = await fetch(
-        `https://katsina-local-government-server-base-url.onrender.com/api/staff/${editingStaff._id}`,
+        `http://localhost:3000/api/staff/${editingStaff._id}`, // ✅ FIXED
         {
           method: "PUT",
           headers: {
@@ -49,25 +55,35 @@ export default function StaffRecords() {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to update staff record");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to update staff record");
       }
 
-      // Refresh the staff records
+      const result = await response.json();
+
       fetchStaffRecords();
       setIsEditing(false);
       setEditingStaff(null);
-      alert("Staff record updated successfully!");
+      setMessage({
+        text: "Staff record updated successfully",
+        type: "success",
+      });
+      setTimeout(() => setMessage({ text: "", type: "" }), 3000);
     } catch (error) {
       console.error("Error updating staff:", error);
-      alert("Failed to update staff record");
+      setMessage({ text: error.message, type: "error" });
+      setTimeout(() => setMessage({ text: "", type: "" }), 3000);
     }
   };
 
   const handlePrint = (staff) => {
-    // Store staff data in localStorage for the print view
     localStorage.setItem("printStaffData", JSON.stringify(staff));
-    // Open print view in a new tab
     window.open("/view-staff", "_blank");
+  };
+
+  const handleView = (staff) => {
+    localStorage.setItem("viewStaffData", JSON.stringify(staff));
+    window.location.href = "/view-staff";
   };
 
   const handleInputChange = (e) => {
@@ -78,12 +94,14 @@ export default function StaffRecords() {
     });
   };
 
-  // Filter staff records based on search term and department filter
+  // Filter staff records
   const filteredStaff = staffRecords.filter((staff) => {
     const matchesSearch =
-      staff.staffName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      staff.fileNumber?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      staff.staffIdNumber?.toLowerCase().includes(searchTerm.toLowerCase());
+      staff.firstname?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      staff.lastname?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      staff.username?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      staff.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      staff.phone?.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesDepartment =
       departmentFilter === "" || staff.department === departmentFilter;
@@ -107,11 +125,16 @@ export default function StaffRecords() {
         <button
           className="btn btn-primary"
           style={{ padding: "8px 15px", margin: "10px auto" }}
+          onClick={() => (window.location.href = "/add-staff")}
         >
           Add New Staff{" "}
           <span style={{ fontWeight: "bolder", fontSize: "16px" }}>+</span>
         </button>
       </div>
+
+      {message.text && (
+        <div className={`message ${message.type}`}>{message.text}</div>
+      )}
 
       <div className="table-container">
         <div className="table-actions">
@@ -141,85 +164,68 @@ export default function StaffRecords() {
           </div>
         </div>
 
-        <table className="table">
-          <thead>
-            <tr>
-              <th>S/N</th>
-              <th>Staff Name</th>
-              <th>File Number</th>
-              <th>Staff ID</th>
-              <th>Department</th>
-              <th>Grade Level</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredStaff.length > 0 ? (
-              filteredStaff.map((staff, index) => (
-                <tr key={staff._id}>
-                  <td>{index + 1}</td>
-                  <td>{staff.staffName}</td>
-                  <td>{staff.officeFileNumber || staff.fileNumber}</td>
-                  <td>{staff.staffIdNumber}</td>
-                  <td>{staff.department}</td>
-                  <td>{staff.gradeLevel}</td>
-                  <td>
-                    <span
-                      className={`status-badge ${
-                        staff.collected
-                          ? staff.returned
-                            ? "badge-returned"
-                            : "badge-collected"
-                          : "badge-pending"
-                      }`}
-                    >
-                      {staff.collected
-                        ? staff.returned
-                          ? "Returned"
-                          : "Collected"
-                        : "Pending"}
-                    </span>
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-secondary"
-                      style={{ marginRight: "5px" }}
-                      onClick={() => handleEdit(staff)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="btn btn-primary"
-                      style={{ marginRight: "5px" }}
-                      onClick={() => handlePrint(staff)}
-                    >
-                      Print
-                    </button>
-                    <button
-                      className="btn btn-info"
-                      onClick={() => {
-                        localStorage.setItem(
-                          "viewStaffData",
-                          JSON.stringify(staff)
-                        );
-                        window.location.href = "/view-staff";
-                      }}
-                    >
-                      View
-                    </button>
+        <div className="table-wrapper">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Department</th>
+                <th>Position</th>
+                <th>Grade Level</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredStaff.length > 0 ? (
+                filteredStaff.map((staff, index) => (
+                  <tr key={staff._id}>
+                    <td>{index + 1}</td>
+                    <td>{staff.firstname}</td>
+                    <td>{staff.lastname}</td>
+                    <td>{staff.username}</td>
+                    <td>{staff.email}</td>
+                    <td>{staff.phone || "N/A"}</td>
+                    <td>{staff.department || "N/A"}</td>
+                    <td>{staff.position || "N/A"}</td>
+                    <td>{staff.gradeLevel || "N/A"}</td>
+                    <td>
+                      <button
+                        className="btn btn-secondary"
+                        style={{
+                          marginRight: "5px",
+                          marginBottom: "5px",
+                          padding: "6px 15px",
+                        }}
+                        onClick={() => handleEdit(staff)}
+                      >
+                        Edit
+                      </button>
+
+                      <button
+                        className="btn btn-info"
+                        onClick={() => handleView(staff)}
+                        style={{ background: "#3498db", color: "#fff" }}
+                      >
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="10" style={{ textAlign: "center" }}>
+                    No staff records found.
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="8" style={{ textAlign: "center" }}>
-                  No staff records found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Edit Modal */}
@@ -229,20 +235,51 @@ export default function StaffRecords() {
             <h2>Edit Staff Record</h2>
             <div className="form-container">
               <div className="form-group">
-                <label>Staff Name</label>
+                <label>First Name *</label>
                 <input
                   type="text"
-                  name="staffName"
-                  value={editForm.staffName || ""}
+                  name="firstname"
+                  value={editForm.firstname || ""}
                   onChange={handleInputChange}
+                  required
                 />
               </div>
               <div className="form-group">
-                <label>Staff ID Number</label>
+                <label>Last Name *</label>
                 <input
                   type="text"
-                  name="staffIdNumber"
-                  value={editForm.staffIdNumber || ""}
+                  name="lastname"
+                  value={editForm.lastname || ""}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Username *</label>
+                <input
+                  type="text"
+                  name="username"
+                  value={editForm.username || ""}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Email *</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={editForm.email || ""}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Phone</label>
+                <input
+                  type="text"
+                  name="phone"
+                  value={editForm.phone || ""}
                   onChange={handleInputChange}
                 />
               </div>
@@ -263,6 +300,15 @@ export default function StaffRecords() {
                 </select>
               </div>
               <div className="form-group">
+                <label>Position</label>
+                <input
+                  type="text"
+                  name="position"
+                  value={editForm.position || ""}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
                 <label>Grade Level</label>
                 <input
                   type="text"
@@ -271,57 +317,7 @@ export default function StaffRecords() {
                   onChange={handleInputChange}
                 />
               </div>
-              <div className="form-group">
-                <label>File Number</label>
-                <input
-                  type="text"
-                  name="fileNumber"
-                  value={editForm.fileNumber || ""}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <label>Office File Number</label>
-                <input
-                  type="text"
-                  name="officeFileNumber"
-                  value={editForm.officeFileNumber || ""}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <label>Status</label>
-                <div className="status-options">
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="collected"
-                      checked={editForm.collected || false}
-                      onChange={(e) =>
-                        setEditForm({
-                          ...editForm,
-                          collected: e.target.checked,
-                        })
-                      }
-                    />
-                    Collected
-                  </label>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="returned"
-                      checked={editForm.returned || false}
-                      onChange={(e) =>
-                        setEditForm({
-                          ...editForm,
-                          returned: e.target.checked,
-                        })
-                      }
-                    />
-                    Returned
-                  </label>
-                </div>
-              </div>
+
               <div className="form-actions">
                 <button className="btn btn-primary" onClick={handleSave}>
                   Save Changes

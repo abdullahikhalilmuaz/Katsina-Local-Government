@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../styles/view.css"
+import "../styles/view.css";
 
 export default function ViewStaff({ setViews }) {
   const [staffData, setStaffData] = useState(null);
@@ -73,73 +73,53 @@ export default function ViewStaff({ setViews }) {
             <h1>Katsina Local Government</h1>
             <p>Staff File Management System</p>
           </div>
-          <div className="logo">{/* Add your logo here or leave empty */}</div>
+          <div className="logo">{/* Add logo if needed */}</div>
         </div>
 
         <div className="staff-details-card">
-          <h2 className="staff-name">{staffData.staffName}</h2>
+          <h2 className="staff-name">
+            {staffData.firstname} {staffData.lastname}
+          </h2>
 
           <div className="details-grid">
             <div className="detail-item">
-              <span className="detail-label">Staff ID:</span>
-              <span className="detail-value">{staffData.staffIdNumber}</span>
+              <span className="detail-label">Firstname:</span>
+              <span className="detail-value">{staffData.firstname}</span>
             </div>
             <div className="detail-item">
-              <span className="detail-label">File Number:</span>
-              <span className="detail-value">{staffData.fileNumber}</span>
+              <span className="detail-label">Lastname:</span>
+              <span className="detail-value">{staffData.lastname}</span>
             </div>
             <div className="detail-item">
-              <span className="detail-label">Office File Number:</span>
-              <span className="detail-value">
-                {staffData.officeFileNumber || "N/A"}
-              </span>
+              <span className="detail-label">Username:</span>
+              <span className="detail-value">{staffData.username}</span>
+            </div>
+            <div className="detail-item">
+              <span className="detail-label">Email:</span>
+              <span className="detail-value">{staffData.email}</span>
+            </div>
+            <div className="detail-item">
+              <span className="detail-label">Phone:</span>
+              <span className="detail-value">{staffData.phone || "N/A"}</span>
             </div>
             <div className="detail-item">
               <span className="detail-label">Department:</span>
-              <span className="detail-value">{staffData.department}</span>
+              <span className="detail-value">
+                {staffData.department || "N/A"}
+              </span>
+            </div>
+            <div className="detail-item">
+              <span className="detail-label">Position:</span>
+              <span className="detail-value">
+                {staffData.position || "N/A"}
+              </span>
             </div>
             <div className="detail-item">
               <span className="detail-label">Grade Level:</span>
-              <span className="detail-value">{staffData.gradeLevel}</span>
-            </div>
-            <div className="detail-item">
-              <span className="detail-label">Status:</span>
-              <span
-                className={`detail-value status ${
-                  staffData.collected
-                    ? staffData.returned
-                      ? "returned"
-                      : "collected"
-                    : "pending"
-                }`}
-              >
-                {staffData.collected
-                  ? staffData.returned
-                    ? "Returned"
-                    : "Collected"
-                  : "Pending"}
+              <span className="detail-value">
+                {staffData.gradeLevel || "N/A"}
               </span>
             </div>
-            {staffData.collectionDate && (
-              <div className="detail-item">
-                <span className="detail-label">Collection Date:</span>
-                <span className="detail-value">
-                  {new Date(staffData.collectionDate).toLocaleDateString()}
-                </span>
-              </div>
-            )}
-            {staffData.collectorName && (
-              <div className="detail-item">
-                <span className="detail-label">Collector Name:</span>
-                <span className="detail-value">{staffData.collectorName}</span>
-              </div>
-            )}
-            {staffData.purpose && (
-              <div className="detail-item">
-                <span className="detail-label">Purpose:</span>
-                <span className="detail-value">{staffData.purpose}</span>
-              </div>
-            )}
           </div>
         </div>
 
@@ -149,7 +129,7 @@ export default function ViewStaff({ setViews }) {
         </div>
       </div>
 
-      {/* Add CSS for printing */}
+      {/* Print-specific styles */}
       <style>{`
         @media print {
           .no-print {

@@ -16,8 +16,8 @@ export default function App() {
 
   return (
     <>
-      {!views && <Header setOpenState={setOpenState} openState={openState} />}
       <BrowserRouter>
+        {!views && <Header setOpenState={setOpenState} openState={openState} />}
         <Routes>
           {/* Not found route */}
           <Route path="*" element={<Notfoundpage />} />

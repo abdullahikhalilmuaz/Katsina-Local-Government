@@ -36,13 +36,10 @@ export default function FileForm() {
         data.append("document", document);
       }
 
-      const res = await fetch(
-        "https://katsina-local-government-server-base-url.onrender.com/api/files",
-        {
-          method: "POST",
-          body: data,
-        }
-      );
+      const res = await fetch("http://localhost:3000/api/files", {
+        method: "POST",
+        body: data,
+      });
 
       if (!res.ok) {
         const errData = await res.json();

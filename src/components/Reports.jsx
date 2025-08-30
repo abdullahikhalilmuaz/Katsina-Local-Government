@@ -8,9 +8,7 @@ export default function Reports() {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const res = await fetch(
-          "https://katsina-local-government-server-base-url.onrender.com/api/reports"
-        ); // ✅ backend endpoint
+        const res = await fetch("http://localhost:3000/api/reports"); // ✅ backend endpoint
         const data = await res.json();
         setDepartmentStats(data.departments || []);
       } catch (err) {

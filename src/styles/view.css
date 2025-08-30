@@ -71,14 +71,17 @@
 
 .letterhead {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
+  margin-top: 30px;
   padding-bottom: 15px;
+  text-align: center;
   border-bottom: 2px solid #3498db;
 }
 
 .letterhead-content h1 {
+  text-align: center;
   margin: 0;
   color: #2c3e50;
 }
@@ -170,4 +173,28 @@
   .letterhead {
     border-bottom: 2px solid #000;
   }
+}
+
+/* Staff Table Styles */
+.table-wrapper {
+  width: 100%;
+  max-height: 500px; /* 👈 set desired height for scrollable area */
+  overflow-x: auto; /* horizontal scroll if table is too wide */
+  overflow-y: auto; /* vertical scroll if table is too tall */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.table {
+  width: max-content; /* table can grow beyond container */
+  border-collapse: collapse;
+  white-space: nowrap; /* prevent wrapping */
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  background: #fff;
 }

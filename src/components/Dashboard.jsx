@@ -10,12 +10,12 @@ export default function Dashboard() {
     const fetchDashboard = async () => {
       try {
         const statsRes = await fetch(
-          "https://katsina-local-government-server-base-url.onrender.com/api/dashboard/stats"
+          "http://localhost:3000/api/dashboard/stats"
         );
         const statsData = await statsRes.json();
 
         const recentRes = await fetch(
-          "https://katsina-local-government-server-base-url.onrender.com/api/dashboard/recent"
+          "http://localhost:3000/api/dashboard/recent"
         );
         const recentData = await recentRes.json();
 

@@ -21,14 +21,11 @@ export default function PrimaryLogin({ setPages }) {
     try {
       setLoading(true);
 
-      const res = await fetch(
-        "https://katsina-local-government-server-base-url.onrender.com/api/admins/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password, adminCode }),
-        }
-      );
+      const res = await fetch("http://localhost:3000/api/admins/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, adminCode }),
+      });
 
       const data = await res.json();
 

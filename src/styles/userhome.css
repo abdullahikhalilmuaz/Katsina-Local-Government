@@ -25,7 +25,7 @@
   box-sizing: border-box;
 }
 
-.user-main-home-container .user-main-content-container div {
+.user-main-home-container .user-main-content-container .contnet {
   color: red;
 }
 
