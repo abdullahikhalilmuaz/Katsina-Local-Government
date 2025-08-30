@@ -22,7 +22,7 @@ export default function PrimaryLogin({ setPages }) {
       setLoading(true);
 
       const res = await fetch(
-        "https://katsina-local-government-server-base-url.onrender.comapi/admins/login",
+        "https://katsina-local-government-server-base-url.onrender.com/api/admins/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

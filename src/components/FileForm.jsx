@@ -37,7 +37,7 @@ export default function FileForm() {
       }
 
       const res = await fetch(
-        "https://katsina-local-government-server-base-url.onrender.comapi/files",
+        "https://katsina-local-government-server-base-url.onrender.com/api/files",
         {
           method: "POST",
           body: data,

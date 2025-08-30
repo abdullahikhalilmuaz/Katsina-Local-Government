@@ -29,7 +29,7 @@ export default function PrimarySignup({ setPages }) {
     try {
       setLoading(true);
       const res = await fetch(
-        "https://katsina-local-government-server-base-url.onrender.comapi/admins/signup",
+        "https://katsina-local-government-server-base-url.onrender.com/api/admins/signup",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

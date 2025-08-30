@@ -2,7 +2,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/header.css";
 import coatOfArms from "../assets/coat-of-arms.png";
 
-export default function Header({ setOpenState, openState }) {
+export default function Header({
+  setOpenState,
+  openState,
+  sidebarOpen,
+  setSidebarOpen, // ✅ added
+}) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -38,7 +43,12 @@ export default function Header({ setOpenState, openState }) {
   return (
     <div className="main-header">
       <div className="menu-logo-title">
-        <div className="menu-icon">
+        {/* ✅ Sidebar toggle button */}
+        <div
+          className="menu-icon"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          style={{ cursor: "pointer" }}
+        >
           <svg
             width="24"
             height="24"

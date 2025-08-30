@@ -9,7 +9,7 @@ export default function Reports() {
     const fetchReports = async () => {
       try {
         const res = await fetch(
-          "https://katsina-local-government-server-base-url.onrender.comapi/reports"
+          "https://katsina-local-government-server-base-url.onrender.com/api/reports"
         ); // ✅ backend endpoint
         const data = await res.json();
         setDepartmentStats(data.departments || []);

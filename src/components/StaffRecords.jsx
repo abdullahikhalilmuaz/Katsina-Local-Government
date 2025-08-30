@@ -17,7 +17,7 @@ export default function StaffRecords() {
 
   const fetchStaffRecords = () => {
     fetch(
-      "https://katsina-local-government-server-base-url.onrender.comapi/staff"
+      "https://katsina-local-government-server-base-url.onrender.com/api/staff"
     )
       .then((res) => {
         if (!res.ok) {
@@ -46,7 +46,7 @@ export default function StaffRecords() {
   const handleSave = async () => {
     try {
       const response = await fetch(
-        `https://katsina-local-government-server-base-url.onrender.comapi/staff/${editingStaff._id}`, // ✅ FIXED
+        `https://katsina-local-government-server-base-url.onrender.com/api/staff/${editingStaff._id}`, // ✅ FIXED
         {
           method: "PUT",
           headers: {

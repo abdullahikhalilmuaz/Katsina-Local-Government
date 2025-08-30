@@ -34,7 +34,7 @@ export default function SecondarySignup({ setPages }) {
     try {
       setLoading(true);
       const res = await fetch(
-        "https://katsina-local-government-server-base-url.onrender.comapi/users/signup",
+        "https://katsina-local-government-server-base-url.onrender.com/api/users/signup",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

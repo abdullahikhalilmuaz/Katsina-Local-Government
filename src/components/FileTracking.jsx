@@ -31,7 +31,7 @@ export default function FileTracking() {
       setLoading(true);
       try {
         const res = await fetch(
-          "https://katsina-local-government-server-base-url.onrender.comapi/files"
+          "https://katsina-local-government-server-base-url.onrender.com/api/files"
         );
         const data = await res.json();
         setFileRecords(data);
@@ -94,7 +94,7 @@ export default function FileTracking() {
   const handleSaveChanges = async () => {
     try {
       const res = await fetch(
-        `https://katsina-local-government-server-base-url.onrender.comapi/files/${selectedFile._id}`,
+        `https://katsina-local-government-server-base-url.onrender.com/api/files/${selectedFile._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
