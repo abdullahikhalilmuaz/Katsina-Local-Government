@@ -28,15 +28,18 @@ export default function PrimarySignup({ setPages }) {
 
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/api/admins/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          password: form.password,
-        }),
-      });
+      const res = await fetch(
+        "https://katsina-local-government-server-base-url.onrender.com/api/admins/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            password: form.password,
+          }),
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) {

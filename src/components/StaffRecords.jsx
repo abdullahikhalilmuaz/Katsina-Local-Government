@@ -15,7 +15,9 @@ export default function StaffRecords() {
   }, []);
 
   const fetchStaffRecords = () => {
-    fetch("http://localhost:3000/api/staff")
+    fetch(
+      "https://katsina-local-government-server-base-url.onrender.com/api/staff"
+    )
       .then((res) => res.json())
       .then((data) => {
         setStaffRecords(data);
@@ -36,7 +38,7 @@ export default function StaffRecords() {
   const handleSave = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/staff/${editingStaff._id}`,
+        `https://katsina-local-government-server-base-url.onrender.com/api/staff/${editingStaff._id}`,
         {
           method: "PUT",
           headers: {
