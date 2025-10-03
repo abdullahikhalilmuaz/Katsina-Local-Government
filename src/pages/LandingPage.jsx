@@ -13,9 +13,8 @@ export default function LandingPage() {
           <div className="logo-section">
             <h2 className="system-title">Staff Management System</h2>
           </div>
-          <button className="login-btn-header" onClick={handleLogin}>
-            Login
-          </button>
+          <br />
+          <br />
         </div>
       </header>
 
@@ -49,10 +48,10 @@ export default function LandingPage() {
                 <div className="image-overlay"></div>
               </div>
               <div className="commissioner-info">
-                <h3 className="commissioner-name">Hon. [Commissioner Name]</h3>
-                <p className="commissioner-title">Commissioner</p>
+                <h3 className="commissioner-name">Hon. Isah Miqdad AD Saude</h3>
+                <p className="commissioner-title">Executive Chairman</p>
                 <p className="commissioner-department">
-                  Department of Personnel Management
+                  Katsina Local Government Council
                 </p>
               </div>
             </div>
