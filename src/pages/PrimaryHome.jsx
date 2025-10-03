@@ -9,29 +9,32 @@ import FileForm from "../components/FileForm";
 import Reports from "../components/Reports";
 
 export default function LandingPage({ sideme, setSideme }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarContent, setSideBarContent] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const adminData = localStorage.getItem("adminData");
     if (!adminData) {
-      navigate("/primary-register"); // 🚀 redirect if not logged in
+      navigate("/primary-register");
     }
   }, [navigate]);
+
+  // Function to close sidebar
+  const closeSidebar = () => {
+    setSideme(false);
+  };
 
   return (
     <div className="app-container">
       <Sidebar
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-        setSideBarContent={setSideBarContent}
-        setSideme={setSideme}
         sideme={sideme}
+        setSideme={setSideme}
+        setSideBarContent={setSideBarContent}
+        closeSidebar={closeSidebar}
       />
-      <div className="content-area">
+      <div className="content-area" onClick={() => sideme && closeSidebar()}>
         {sidebarContent === "dashboard" ? (
-          <Dashboard />
+          <Dashboard setSideBarContent={setSideBarContent} />
         ) : sidebarContent === "staff-record" ? (
           <StaffRecords />
         ) : sidebarContent === "file-tracking" ? (
@@ -41,7 +44,7 @@ export default function LandingPage({ sideme, setSideme }) {
         ) : sidebarContent === "new-file" ? (
           <FileForm />
         ) : (
-          <Dashboard />
+          <Dashboard setSideBarContent={setSideBarContent} />
         )}
       </div>
     </div>

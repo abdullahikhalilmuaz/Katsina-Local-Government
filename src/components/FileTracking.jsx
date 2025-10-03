@@ -8,7 +8,7 @@ export default function FileTracking() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
-  const [editMode, setEditMode] = useState(false); // 👈 controls slide
+  const [editMode, setEditMode] = useState(false);
   const [editForm, setEditForm] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -45,6 +45,26 @@ export default function FileTracking() {
 
     fetchFiles();
   }, []);
+
+  // ✅ Calculate status statistics
+  const calculateStatusStats = () => {
+    const stats = {
+      collected: 0,
+      returned: 0,
+      pending: 0,
+      total: fileRecords.length,
+    };
+
+    fileRecords.forEach((file) => {
+      if (file.collected) stats.collected++;
+      if (file.returned) stats.returned++;
+      if (file.collected && !file.returned) stats.pending++;
+    });
+
+    return stats;
+  };
+
+  const statusStats = calculateStatusStats();
 
   // ✅ Filter logic
   useEffect(() => {
@@ -117,10 +137,85 @@ export default function FileTracking() {
     }
   };
 
+  // ✅ Handle status selection
+  const handleStatusSelect = (status) => {
+    setStatusFilter(status);
+  };
+
+  // ✅ Clear status filter
+  const handleClearFilter = () => {
+    setStatusFilter("");
+    setSearchTerm("");
+  };
+
+  // ✅ Get the count for the currently selected status
+  const getSelectedStatusCount = () => {
+    if (statusFilter === "") {
+      return statusStats.total;
+    }
+    return statusStats[statusFilter] || 0;
+  };
+
+  // ✅ Get the display name for the summary
+  const getSummaryDisplayName = () => {
+    if (statusFilter === "") {
+      return "All Files";
+    }
+    return statusFilter === "collected"
+      ? "Collected Files"
+      : statusFilter === "returned"
+      ? "Returned Files"
+      : statusFilter === "pending"
+      ? "Pending Returns"
+      : "All Files";
+  };
+
+  // ✅ Get the status color for the summary
+  const getStatusColor = () => {
+    if (statusFilter === "") return "#006600";
+    if (statusFilter === "collected") return "#3498db";
+    if (statusFilter === "returned") return "#27ae60";
+    if (statusFilter === "pending") return "#e67e22";
+    return "#006600";
+  };
+
   return (
     <div>
       <div className="page-header">
-        <h1 className="page-title">File Tracking</h1>
+        <div className="header-left">
+          <h1 className="page-title">File Tracking</h1>
+          {statusFilter && (
+            <div className="active-filter">
+              Showing: <strong>{getSummaryDisplayName()}</strong>
+              <button className="clear-filter-btn" onClick={handleClearFilter}>
+                × Clear
+              </button>
+            </div>
+          )}
+        </div>
+        <div className="header-right">
+          <div className="status-summary">
+            <h3>Files Status Summary</h3>
+            <div className="status-stats">
+              <div
+                className="status-stat-item active"
+                style={{ borderLeft: `4px solid ${getStatusColor()}` }}
+              >
+                <span className="status-name">{getSummaryDisplayName()}:</span>
+                <span className="status-count">
+                  {getSelectedStatusCount()} files
+                </span>
+              </div>
+              {/* <div
+                className="status-stat-item total"
+                onClick={handleClearFilter}
+              >
+                <span className="status-name">View All Files</span>
+                <span className="status-count">↶ Reset</span>
+              </div> */}
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="table-container">
@@ -138,7 +233,7 @@ export default function FileTracking() {
             <select
               className="form-select"
               value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
+              onChange={(e) => handleStatusSelect(e.target.value)}
             >
               <option value="">All Status</option>
               <option value="collected">Collected</option>

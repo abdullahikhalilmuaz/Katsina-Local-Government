@@ -1,19 +1,29 @@
 import { NavLink } from "react-router-dom";
 import "../styles/sidebar.css";
 
-export default function Sidebar({ setSideBarContent, sideme }) {
-  const handleDashboard = () => setSideBarContent("dashboard");
-  const handleStaffRecord = () => setSideBarContent("staff-record");
-  const handleFileTracking = () => setSideBarContent("file-tracking");
-  const handleReports = () => setSideBarContent("reports");
-  const handleNewFile = () => setSideBarContent("new-file");
+export default function Sidebar({
+  setSideBarContent,
+  sideme,
+  setSideme,
+  closeSidebar,
+}) {
+  const handleMenuClick = (content) => {
+    setSideBarContent(content);
+    closeSidebar(); // Close sidebar when any menu item is clicked
+  };
+
+  const handleDashboard = () => handleMenuClick("dashboard");
+  const handleStaffRecord = () => handleMenuClick("staff-record");
+  const handleFileTracking = () => handleMenuClick("file-tracking");
+  const handleReports = () => handleMenuClick("reports");
+  const handleNewFile = () => handleMenuClick("new-file");
 
   return (
     <>
-      {/* Overlay */}
+      {/* Overlay - Now closes sidebar when clicked */}
       <div
         className={`sidebar-overlay ${sideme ? "active" : ""}`}
-        onClick={() => console.log("Overlay clicked")}
+        onClick={closeSidebar}
       />
 
       {/* Sidebar */}
@@ -21,7 +31,7 @@ export default function Sidebar({ setSideBarContent, sideme }) {
         <div className="sidebar-header">
           <h3>Menu</h3>
         </div>
-        <ul className="sidebar-menu" >
+        <ul className="sidebar-menu">
           <li>
             <NavLink className="sidebar-item" onClick={handleDashboard}>
               <span className="sidebar-icon">

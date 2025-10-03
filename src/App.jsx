@@ -57,7 +57,6 @@ export default function App() {
             element={<ViewStaff setViews={setViews} />}
           />
         </Routes>
-        
       </BrowserRouter>
     </>
   );

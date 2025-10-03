@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/dashboard.css";
 
-export default function Dashboard() {
+export default function Dashboard({ setSideBarContent }) {
   const [stats, setStats] = useState(null);
   const [recentActivities, setRecentActivities] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,25 +43,48 @@ export default function Dashboard() {
       <h1 className="page-title">Dashboard</h1>
 
       <div className="dashboard-container">
-        <div className="dashboard-card">
+        {/* Staff Records Card */}
+        <div
+          className="dashboard-card clickable-card"
+          onClick={() => setSideBarContent("staff-record")}
+        >
           <span className="card-icon">👥</span>
           <h3 className="card-title">Total Staff</h3>
           <p className="card-value">{stats.totalStaff}</p>
+          <div className="card-hint">Click to view staff records</div>
         </div>
-        <div className="dashboard-card">
+
+        {/* Files Collected Card */}
+        <div
+          className="dashboard-card clickable-card"
+          onClick={() => setSideBarContent("file-tracking")}
+        >
           <span className="card-icon">📥</span>
           <h3 className="card-title">Files Collected</h3>
           <p className="card-value">{stats.filesCollected}</p>
+          <div className="card-hint">Click to view file tracking</div>
         </div>
-        <div className="dashboard-card">
+
+        {/* Files Returned Card */}
+        <div
+          className="dashboard-card clickable-card"
+          onClick={() => setSideBarContent("file-tracking")}
+        >
           <span className="card-icon">📤</span>
           <h3 className="card-title">Files Returned</h3>
           <p className="card-value">{stats.filesReturned}</p>
+          <div className="card-hint">Click to view file tracking</div>
         </div>
-        <div className="dashboard-card">
+
+        {/* Pending Returns Card */}
+        <div
+          className="dashboard-card clickable-card"
+          onClick={() => setSideBarContent("file-tracking")}
+        >
           <span className="card-icon">⏳</span>
           <h3 className="card-title">Pending Returns</h3>
           <p className="card-value">{stats.pendingReturns}</p>
+          <div className="card-hint">Click to view file tracking</div>
         </div>
       </div>
 

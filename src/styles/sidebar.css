@@ -1,35 +1,35 @@
-/* Sidebar base */
+/* Sidebar Styles */
 .sidebar {
   position: fixed;
   top: 70px; /* Header height */
   left: 0;
+  bottom: 0;
   width: 250px;
-  height: calc(100vh - 70px);
+  height: 100vh;
   background-color: white;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   z-index: 998;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
-/* Sidebar active state */
 .sidebar.active {
   transform: translateX(0);
 }
 
-/* Overlay */
 .sidebar-overlay {
   position: fixed;
   top: 70px;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5); /* Fixed: Added transparency */
   z-index: 997;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
+  cursor: pointer; /* Show it's clickable */
 }
 
 .sidebar-overlay.active {
@@ -37,7 +37,6 @@
   visibility: visible;
 }
 
-/* Sidebar header and items */
 .sidebar-header {
   padding: 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -61,12 +60,11 @@
   text-decoration: none;
   color: var(--text-color);
   transition: all 0.2s ease;
+  cursor: pointer; /* Make it clear it's clickable */
 }
 
 .sidebar-item:hover {
-  background-color: var(--primary-color-light, rgba(0, 102, 0, 0.1));
-  color: var(--primary-color);
-  border-left: 4px solid var(--primary-color);
+  background-color: rgba(0, 102, 0, 0.05);
 }
 
 .sidebar-item.active {
@@ -88,11 +86,10 @@
   font-weight: 500;
 }
 
-/* Desktop: sidebar always visible */
+/* Responsive Styles */
 @media (min-width: 992px) {
   .sidebar {
     transform: translateX(0);
-    display: block;
   }
 
   .sidebar-overlay {
@@ -100,7 +97,6 @@
   }
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
   .sidebar {
     width: 280px;

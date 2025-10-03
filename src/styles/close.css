@@ -1,0 +1,26 @@
+.close {
+  /* display: flex;
+  flex-direction: column; */
+  /* justify-content: space-between; */
+  width: 30px;
+  height: 30px;
+}
+
+.close .close-one {
+  width: 70%;
+  height: 3px;
+  background-color: black;
+  transform: rotate(40deg);
+  margin-top: 12px;
+  border-radius: 10px;
+}
+
+.close .close-two {
+  width: 70%;
+  height: 3px;
+  background-color: black;
+  transform: rotate(-43deg);
+  margin-right: 8px;
+  margin-top: -3px;
+  border-radius: 10px;
+}

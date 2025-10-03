@@ -283,3 +283,136 @@
     transform: translateY(0);
   }
 }
+
+/* Status Summary Styles */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.header-left {
+  flex: 1;
+}
+
+.header-right {
+  flex: 0 0 auto;
+}
+
+.status-summary {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 15px;
+  min-width: 220px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.status-summary h3 {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
+  color: #495057;
+  font-weight: 600;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 8px;
+}
+
+.status-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.status-stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border-left: 4px solid #006600;
+}
+
+.status-stat-item.active {
+  background: #f8f9fa;
+}
+
+.status-stat-item.total {
+  background: #e7f3ff;
+  border: 1px solid #b3d9ff;
+  cursor: pointer;
+  margin-top: 5px;
+  border-left: 4px solid #0066cc;
+}
+
+.status-stat-item.total:hover {
+  background: #d4e9ff;
+  transform: translateY(-1px);
+}
+
+.status-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6c757d;
+}
+
+.status-stat-item.active .status-name {
+  color: #495057;
+  font-weight: 600;
+}
+
+.status-stat-item.total .status-name {
+  color: #0066cc;
+  font-weight: 500;
+}
+
+.status-count {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #495057;
+  background: #e9ecef;
+  padding: 4px 10px;
+  border-radius: 15px;
+}
+
+.status-stat-item.active .status-count {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.status-stat-item.total .status-count {
+  background: #0066cc;
+  color: white;
+  font-size: 0.8rem;
+}
+
+/* Active Filter Indicator */
+.active-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #e7f3ff;
+  border: 1px solid #b3d9ff;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.clear-filter-btn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.clear-filter-btn:hover {
+  background: #ff5252;
+}

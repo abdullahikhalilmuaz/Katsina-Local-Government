@@ -5,17 +5,18 @@ import "../styles/userhome.css";
 import Home from "../components/Home";
 import Profile from "../components/Profile";
 import Collab from "../components/Collab";
+import Notification from "../components/Notification";
 
 export default function LandingPage() {
   const [screens, setScreens] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const userData = localStorage.getItem("userData");
-    if (!userData) {
-      navigate("/secondary-register"); // 🚀 redirect if not logged in
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const userData = localStorage.getItem("userData");
+  //   if (!userData) {
+  //     navigate("/secondary-register"); // 🚀 redirect if not logged in
+  //   }
+  // }, [navigate]);
 
   return (
     <div className="user-main-home-container">
@@ -27,14 +28,13 @@ export default function LandingPage() {
             <Home />
           ) : screens === "profile" ? (
             <Profile />
-          ) : screens === "collab" ? (
-            <Collab />
           ) : (
             <Home />
           )}
         </div>
       </div>
       <SecondaryHomeBottomNavBar setScreens={setScreens} />
+      {console.log(screens)}
     </div>
   );
 }

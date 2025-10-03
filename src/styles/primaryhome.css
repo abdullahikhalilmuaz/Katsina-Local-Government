@@ -43,45 +43,6 @@ body {
   transition: margin-left 0.3s ease;
 }
 
-/* Sidebar Styles */
-.sidebar {
-  position: fixed;
-  top: var(--header-height);
-  left: 0;
-  width: var(--sidebar-width);
-  height: calc(100vh - var(--header-height));
-  background-color: white;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  padding: 20px 0;
-  z-index: 999;
-}
-
-.sidebar-menu {
-  list-style: none;
-}
-
-.sidebar-item {
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-}
-
-.sidebar-item:hover {
-  background-color: rgba(0, 102, 0, 0.1);
-}
-
-.sidebar-item.active {
-  background-color: rgba(0, 102, 0, 0.2);
-  border-left: 4px solid var(--primary-color);
-}
-
-.sidebar-icon {
-  margin-right: 10px;
-  color: var(--primary-color);
-}
-
 /* Dashboard Styles */
 .dashboard-container {
   display: grid;
