@@ -22,8 +22,15 @@ export default function LandingPage() {
       <section className="hero-section">
         <div className="hero-content">
           <div className="hero-text">
-            <div className="welcome-badge">
+            <div className="welcome-badge" style={{ cursor: "pointer" }}>
               <span>Welcome</span>
+            </div>
+            <div
+              className="welcome-badge"
+              onClick={handleLogin}
+              style={{ marginLeft: "10px", cursor: "pointer" }}
+            >
+              <span>Login ?</span>
             </div>
             <p className="hero-subtitle">
               Leading with Excellence, Serving with Dedication
@@ -154,26 +161,6 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="landing-footer">
         <div className="footer-content">
-          <div className="footer-section">
-            <h4>Contact Us</h4>
-            <p>Office of the Commissioner</p>
-            <p>Department of Personnel Management</p>
-            <p>Email: info@personnel.gov</p>
-          </div>
-          <div className="footer-section">
-            <h4>Quick Links</h4>
-            <ul>
-              <li>
-                <a href="#about">About Us</a>
-              </li>
-              <li>
-                <a href="#services">Services</a>
-              </li>
-              <li>
-                <a href="#contact">Contact</a>
-              </li>
-            </ul>
-          </div>
           <div className="footer-section">
             <h4>Office Hours</h4>
             <p>Monday - Friday</p>
