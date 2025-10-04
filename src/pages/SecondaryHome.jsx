@@ -5,7 +5,7 @@ import "../styles/userhome.css";
 import Home from "../components/Home";
 import Profile from "../components/Profile";
 import Collab from "../components/Collab";
-import Notification from "../components/Notification";
+import Notify from "../components/Notify";
 
 export default function LandingPage() {
   const [screens, setScreens] = useState(null);
@@ -28,6 +28,8 @@ export default function LandingPage() {
             <Home />
           ) : screens === "profile" ? (
             <Profile />
+          ) : screens === "notification" ? (
+            <Notify />
           ) : (
             <Home />
           )}

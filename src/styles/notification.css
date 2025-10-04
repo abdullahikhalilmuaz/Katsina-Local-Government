@@ -1,0 +1,79 @@
+.notification-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.badge-info {
+  background-color: #3498db;
+  color: white;
+}
+
+.badge-warning {
+  background-color: #f39c12;
+  color: white;
+}
+
+.badge-urgent {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 24px; /* Consistent padding */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 120px; /* Ensure minimum width for consistency */
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: orange;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  padding: 8px 16px; /* Slightly smaller for delete buttons */
+  min-width: auto; /* Remove min-width for delete buttons */
+  font-size: 13px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Modal specific button styles */
+.modal-content .btn {
+  flex: 1; /* Make buttons equal width in modal */
+}
+
+/* Ensure the "Add New Notification" button has proper padding */
+.page-header .btn-primary {
+  padding: 12px 24px;
+}

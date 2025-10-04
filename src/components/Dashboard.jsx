@@ -40,7 +40,9 @@ export default function Dashboard({ setSideBarContent }) {
 
   return (
     <div>
-      <h1 className="page-title">Dashboard</h1>
+      <h1 className="page-title" style={{ color: "gray" }}>
+        Dashboard
+      </h1>
 
       <div className="dashboard-container">
         {/* Staff Records Card */}
