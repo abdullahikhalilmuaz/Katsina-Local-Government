@@ -544,26 +544,26 @@ export default function StaffRecords() {
             "Helvetica Neue", Arial, sans-serif;
           background-color: #f5f7fa;
           color: #2c3e50;
-          line-height: 1.6;
+          line-height: 1.4;
         }
 
         .page-header {
           background: linear-gradient(135deg, #027a30 0%, #0be4b5 100%);
-          padding: 32px 40px;
-          margin-bottom: 32px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          padding: 20px 24px;
+          margin-bottom: 20px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
           flex-wrap: wrap;
-          gap: 20px;
+          gap: 12px;
         }
 
         .page-title {
           color: #ffffff;
-          font-size: 32px;
+          font-size: 24px;
           font-weight: 700;
-          letter-spacing: -0.5px;
+          letter-spacing: -0.3px;
           margin: 0;
         }
 
@@ -572,15 +572,15 @@ export default function StaffRecords() {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          min-height: 400px;
-          gap: 20px;
+          min-height: 300px;
+          gap: 16px;
         }
 
         .spinner {
-          width: 50px;
-          height: 50px;
-          border: 4px solid #f3f4f6;
-          border-top: 4px solid #3498db;
+          width: 40px;
+          height: 40px;
+          border: 3px solid #f3f4f6;
+          border-top: 3px solid #3498db;
           border-radius: 50%;
           animation: spin 1s linear infinite;
         }
@@ -595,10 +595,11 @@ export default function StaffRecords() {
         }
 
         .message {
-          padding: 16px 24px;
-          margin: 0 40px 24px;
-          border-radius: 8px;
+          padding: 12px 16px;
+          margin: 0 24px 16px;
+          border-radius: 6px;
           font-weight: 500;
+          font-size: 14px;
           animation: slideDown 0.3s ease-out;
         }
 
@@ -626,17 +627,17 @@ export default function StaffRecords() {
         }
 
         .table-container {
-          margin: 0 40px;
+          margin: 0 24px;
           background: #ffffff;
-          border-radius: 12px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-          overflow: hidden;
+          border-radius: 8px;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+          // overflow: hidden;
         }
 
         .table-actions {
           display: flex;
-          gap: 16px;
-          padding: 24px;
+          gap: 12px;
+          padding: 16px;
           background: #f8f9fa;
           border-bottom: 1px solid #e9ecef;
           flex-wrap: wrap;
@@ -644,21 +645,21 @@ export default function StaffRecords() {
 
         .search-box {
           flex: 1;
-          min-width: 300px;
+          min-width: 250px;
         }
 
         .filter-options {
-          min-width: 200px;
+          min-width: 180px;
         }
 
         .form-control,
         .form-select {
           width: 100%;
-          padding: 12px 16px;
+          padding: 8px 12px;
           border: 1px solid #dce1e8;
-          border-radius: 8px;
-          font-size: 14px;
-          transition: all 0.3s ease;
+          border-radius: 6px;
+          font-size: 13px;
+          transition: all 0.2s ease;
           background-color: #ffffff;
         }
 
@@ -666,16 +667,18 @@ export default function StaffRecords() {
         .form-select:focus {
           outline: none;
           border-color: #3498db;
-          box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+          box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
         }
 
         .form-control::placeholder {
           color: #95a5a6;
+          font-size: 13px;
         }
 
+        /* FIXED TABLE STYLES - Reduced spacing and better overflow */
         .table-wrapper {
           overflow-x: auto;
-          max-height: calc(100vh - 350px);
+          max-height: calc(100vh - 300px);
           position: relative;
         }
 
@@ -683,7 +686,8 @@ export default function StaffRecords() {
           width: 100%;
           border-collapse: separate;
           border-spacing: 0;
-          font-size: 14px;
+          font-size: 12px;
+          min-width: 1400px; /* Ensure all columns fit */
         }
 
         .table thead {
@@ -694,23 +698,25 @@ export default function StaffRecords() {
         }
 
         .table thead th {
-          padding: 16px 12px;
+          padding: 10px 8px;
           text-align: left;
           font-weight: 600;
-          font-size: 13px;
+          font-size: 11px;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.3px;
           color: #ffffff;
           white-space: nowrap;
-          border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .table thead th:first-child {
-          padding-left: 24px;
+          padding-left: 16px;
+          width: 50px;
         }
 
         .table thead th:last-child {
-          padding-right: 24px;
+          padding-right: 16px;
+          width: 120px;
         }
 
         .table tbody tr {
@@ -724,46 +730,53 @@ export default function StaffRecords() {
 
         .table tbody tr:hover {
           background-color: #e3f2fd;
-          transform: scale(1.001);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .table tbody td {
-          padding: 14px 12px;
+          padding: 8px;
           border-bottom: 1px solid #e9ecef;
           color: #495057;
           vertical-align: middle;
+          font-size: 12px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 150px;
         }
 
         .table tbody td:first-child {
-          padding-left: 24px;
+          padding-left: 16px;
           font-weight: 600;
           color: #6c757d;
+          width: 50px;
         }
 
         .table tbody td:last-child {
-          padding-right: 24px;
+          width: auto;
+          white-space: normal;
         }
 
         .table tbody tr:last-child td {
           border-bottom: none;
         }
 
+        /* Compact buttons */
         .btn {
-          padding: 8px 16px;
+          padding: 6px 12px;
           border: none;
-          border-radius: 6px;
-          font-size: 13px;
+          border-radius: 4px;
+          font-size: 11px;
           font-weight: 500;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: all 0.2s ease;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.3px;
+          margin: 2px;
         }
 
         .btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+          transform: translateY(-1px);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .btn-primary {
@@ -793,7 +806,7 @@ export default function StaffRecords() {
           justify-content: center;
           z-index: 1000;
           animation: fadeIn 0.3s ease;
-          padding: 20px;
+          padding: 16px;
           overflow-y: auto;
         }
 
@@ -808,11 +821,11 @@ export default function StaffRecords() {
 
         .modal-content {
           background: #ffffff;
-          border-radius: 12px;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+          border-radius: 8px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
           width: 100%;
-          max-width: 900px;
-          max-height: 90vh;
+          max-width: 800px;
+          max-height: 85vh;
           overflow-y: auto;
           animation: slideUp 0.3s ease;
         }
@@ -820,7 +833,7 @@ export default function StaffRecords() {
         @keyframes slideUp {
           from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
           }
           to {
             opacity: 1;
@@ -829,41 +842,41 @@ export default function StaffRecords() {
         }
 
         .modal-content h2 {
-          padding: 24px 32px;
+          padding: 20px 24px;
           margin: 0;
           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
           color: #ffffff;
-          font-size: 24px;
+          font-size: 20px;
           font-weight: 600;
-          border-radius: 12px 12px 0 0;
+          border-radius: 8px 8px 0 0;
         }
 
         .form-container {
-          padding: 32px;
+          padding: 24px;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 20px;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 16px;
         }
 
         .form-group {
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 6px;
         }
 
         .form-group label {
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 600;
           color: #495057;
         }
 
         .form-group input,
         .form-group select {
-          padding: 12px 16px;
+          padding: 8px 12px;
           border: 1px solid #dce1e8;
-          border-radius: 8px;
-          font-size: 14px;
-          transition: all 0.3s ease;
+          border-radius: 6px;
+          font-size: 13px;
+          transition: all 0.2s ease;
           background-color: #ffffff;
         }
 
@@ -871,13 +884,13 @@ export default function StaffRecords() {
         .form-group select:focus {
           outline: none;
           border-color: #3498db;
-          box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+          box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
         }
 
         .form-actions {
           grid-column: 1 / -1;
           display: flex;
-          gap: 12px;
+          gap: 10px;
           justify-content: flex-end;
           padding-top: 16px;
           border-top: 1px solid #e9ecef;
@@ -887,33 +900,33 @@ export default function StaffRecords() {
         .department-summary {
           background: #f8f9fa;
           border: 1px solid #e9ecef;
-          border-radius: 8px;
-          padding: 15px;
-          min-width: 220px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          border-radius: 6px;
+          padding: 12px;
+          min-width: 200px;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         .department-summary h3 {
-          margin: 0 0 12px 0;
-          font-size: 1rem;
+          margin: 0 0 10px 0;
+          font-size: 14px;
           color: #495057;
           font-weight: 600;
           border-bottom: 1px solid #dee2e6;
-          padding-bottom: 8px;
+          padding-bottom: 6px;
         }
 
         .department-stats {
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 6px;
         }
 
         .department-stat-item {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 8px 10px;
-          border-radius: 6px;
+          padding: 6px 8px;
+          border-radius: 4px;
           transition: all 0.2s ease;
         }
 
@@ -926,16 +939,15 @@ export default function StaffRecords() {
           background: #e7f3ff;
           border: 1px solid #b3d9ff;
           cursor: pointer;
-          margin-top: 5px;
+          margin-top: 4px;
         }
 
         .department-stat-item.total:hover {
           background: #d4e9ff;
-          transform: translateY(-1px);
         }
 
         .dept-name {
-          font-size: 0.9rem;
+          font-size: 13px;
           font-weight: 500;
           color: #6c757d;
         }
@@ -951,12 +963,12 @@ export default function StaffRecords() {
         }
 
         .dept-count {
-          font-size: 0.85rem;
+          font-size: 12px;
           font-weight: 600;
           color: #495057;
           background: #e9ecef;
-          padding: 4px 10px;
-          border-radius: 15px;
+          padding: 2px 8px;
+          border-radius: 12px;
         }
 
         .department-stat-item.active .dept-count {
@@ -967,28 +979,28 @@ export default function StaffRecords() {
         .department-stat-item.total .dept-count {
           background: #0066cc;
           color: white;
-          font-size: 0.8rem;
+          font-size: 11px;
         }
 
         .active-filter {
           display: flex;
           align-items: center;
-          gap: 10px;
-          margin-top: 8px;
-          padding: 8px 12px;
+          gap: 8px;
+          margin-top: 6px;
+          padding: 6px 10px;
           background: #e7f3ff;
           border: 1px solid #b3d9ff;
           border-radius: 4px;
-          font-size: 0.9rem;
+          font-size: 13px;
         }
 
         .clear-filter-btn {
           background: #ff6b6b;
           color: white;
           border: none;
-          border-radius: 12px;
-          padding: 2px 8px;
-          font-size: 0.8rem;
+          border-radius: 10px;
+          padding: 2px 6px;
+          font-size: 11px;
           cursor: pointer;
           transition: background 0.2s ease;
         }
@@ -1000,10 +1012,50 @@ export default function StaffRecords() {
         @media (max-width: 768px) {
           .page-header {
             flex-direction: column;
+            padding: 16px 20px;
+          }
+
+          .page-title {
+            font-size: 20px;
+          }
+
+          .table-container {
+            margin: 0 16px;
+          }
+
+          .table-actions {
+            padding: 12px;
+            gap: 8px;
+          }
+
+          .search-box,
+          .filter-options {
+            min-width: 100%;
           }
 
           .form-container {
             grid-template-columns: 1fr;
+            padding: 20px;
+            gap: 12px;
+          }
+
+          .modal-content {
+            max-height: 90vh;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .page-header {
+            padding: 12px 16px;
+          }
+
+          .table-container {
+            margin: 0 12px;
+          }
+
+          .message {
+            margin: 0 16px 12px;
+            padding: 10px 12px;
           }
         }
       `}</style>
