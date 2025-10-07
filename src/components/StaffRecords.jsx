@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "../styles/view.css";
 
 export default function StaffRecords() {
   const [staffRecords, setStaffRecords] = useState([]);
@@ -16,7 +15,6 @@ export default function StaffRecords() {
     fetchStaffRecords();
   }, []);
 
-  // Calculate department statistics whenever staffRecords changes
   useEffect(() => {
     if (staffRecords.length > 0) {
       calculateDepartmentStats();
@@ -25,7 +23,6 @@ export default function StaffRecords() {
 
   const calculateDepartmentStats = () => {
     const stats = {};
-
     staffRecords.forEach((staff) => {
       const dept = staff.department || "Unassigned";
       if (!stats[dept]) {
@@ -33,7 +30,6 @@ export default function StaffRecords() {
       }
       stats[dept]++;
     });
-
     setDepartmentStats(stats);
   };
 
@@ -83,8 +79,6 @@ export default function StaffRecords() {
         throw new Error(errorData.message || "Failed to update staff record");
       }
 
-      const result = await response.json();
-
       fetchStaffRecords();
       setIsEditing(false);
       setEditingStaff(null);
@@ -100,16 +94,20 @@ export default function StaffRecords() {
     }
   };
 
-  const handlePrint = (staff) => {
-    localStorage.setItem("printStaffData", JSON.stringify(staff));
+  const handleView = (staff) => {
+    // Clear any existing staff data first
+    if (typeof window !== "undefined") {
+      // Remove from localStorage
+      localStorage.removeItem("viewStaffData");
+      localStorage.removeItem("printStaffData");
+
+      // Store new data in localStorage
+      localStorage.setItem("viewStaffData", JSON.stringify(staff));
+    }
+
+    // Open in new tab
     window.open("/view-staff", "_blank");
   };
-
-  const handleView = (staff) => {
-    localStorage.setItem("viewStaffData", JSON.stringify(staff));
-    window.location.href = "/view-staff";
-  };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditForm({
@@ -118,18 +116,15 @@ export default function StaffRecords() {
     });
   };
 
-  // Handle department click from dropdown
   const handleDepartmentSelect = (department) => {
     setDepartmentFilter(department);
   };
 
-  // Clear department filter
   const handleClearFilter = () => {
     setDepartmentFilter("");
     setSearchTerm("");
   };
 
-  // Filter staff records
   const filteredStaff = staffRecords.filter((staff) => {
     const matchesSearch =
       staff.firstname?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -149,7 +144,6 @@ export default function StaffRecords() {
     return matchesSearch && matchesDepartment;
   });
 
-  // Get the count for the currently selected department
   const getSelectedDepartmentCount = () => {
     if (departmentFilter === "") {
       return staffRecords.length;
@@ -157,7 +151,6 @@ export default function StaffRecords() {
     return departmentStats[departmentFilter] || 0;
   };
 
-  // Get the display name for the summary
   const getSummaryDisplayName = () => {
     if (departmentFilter === "") {
       return "All Departments";
@@ -342,17 +335,678 @@ export default function StaffRecords() {
         </div>
       </div>
 
-      {/* Edit Modal - Keep your existing modal code */}
+      {/* Edit Modal */}
       {isEditing && editingStaff && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="modal-overlay" onClick={() => setIsEditing(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2>Edit Staff Record</h2>
             <div className="form-container">
-              {/* ... your existing modal form ... */}
+              <div className="form-group">
+                <label>First Name</label>
+                <input
+                  type="text"
+                  name="firstname"
+                  value={editForm.firstname || ""}
+                  onChange={handleInputChange}
+                  placeholder="Enter first name"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  name="lastname"
+                  value={editForm.lastname || ""}
+                  onChange={handleInputChange}
+                  placeholder="Enter last name"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  value={editForm.username || ""}
+                  onChange={handleInputChange}
+                  placeholder="Enter username"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={editForm.email || ""}
+                  onChange={handleInputChange}
+                  placeholder="Enter email"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Phone</label>
+                <input
+                  type="text"
+                  name="phone"
+                  value={editForm.phone || ""}
+                  onChange={handleInputChange}
+                  placeholder="Enter phone number"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Department</label>
+                <select
+                  name="department"
+                  value={editForm.department || ""}
+                  onChange={handleInputChange}
+                >
+                  <option value="">Select Department</option>
+                  <option value="Personnel">Personnel</option>
+                  <option value="PHCC">PHCC</option>
+                  <option value="ESSD">ESSD</option>
+                  <option value="Agric">Agric</option>
+                  <option value="WATSAN">WATSAN</option>
+                  <option value="Works">Works</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Portfolio</label>
+                <input
+                  type="text"
+                  name="portfolio"
+                  value={editForm.portfolio || ""}
+                  onChange={handleInputChange}
+                  placeholder="Enter portfolio/position"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Grade Level</label>
+                <input
+                  type="text"
+                  name="gradeLevel"
+                  value={editForm.gradeLevel || ""}
+                  onChange={handleInputChange}
+                  placeholder="Enter grade level"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Verification Number</label>
+                <input
+                  type="text"
+                  name="verificationNumber"
+                  value={editForm.verificationNumber || ""}
+                  onChange={handleInputChange}
+                  placeholder="Enter verification number"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>N File Number</label>
+                <input
+                  type="text"
+                  name="nFileNumber"
+                  value={editForm.nFileNumber || ""}
+                  onChange={handleInputChange}
+                  placeholder="Enter N file number"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>KTLG Number</label>
+                <input
+                  type="text"
+                  name="ktlgNumber"
+                  value={editForm.ktlgNumber || ""}
+                  onChange={handleInputChange}
+                  placeholder="Enter KTLG number"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Date of First Appointment</label>
+                <input
+                  type="date"
+                  name="dateOfFirstAppointment"
+                  value={
+                    editForm.dateOfFirstAppointment
+                      ? new Date(editForm.dateOfFirstAppointment)
+                          .toISOString()
+                          .split("T")[0]
+                      : ""
+                  }
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Date of Present Appointment</label>
+                <input
+                  type="date"
+                  name="dateOfPresentAppointment"
+                  value={
+                    editForm.dateOfPresentAppointment
+                      ? new Date(editForm.dateOfPresentAppointment)
+                          .toISOString()
+                          .split("T")[0]
+                      : ""
+                  }
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Date of Birth</label>
+                <input
+                  type="date"
+                  name="dateOfBirth"
+                  value={
+                    editForm.dateOfBirth
+                      ? new Date(editForm.dateOfBirth)
+                          .toISOString()
+                          .split("T")[0]
+                      : ""
+                  }
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className="form-actions">
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setIsEditing(false)}
+                >
+                  Cancel
+                </button>
+                <button className="btn btn-primary" onClick={handleSave}>
+                  Save Changes
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
+
+      <style jsx>{`
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            "Helvetica Neue", Arial, sans-serif;
+          background-color: #f5f7fa;
+          color: #2c3e50;
+          line-height: 1.6;
+        }
+
+        .page-header {
+          background: linear-gradient(135deg, #027a30 0%, #0be4b5 100%);
+          padding: 32px 40px;
+          margin-bottom: 32px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+
+        .page-title {
+          color: #ffffff;
+          font-size: 32px;
+          font-weight: 700;
+          letter-spacing: -0.5px;
+          margin: 0;
+        }
+
+        .loading-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          min-height: 400px;
+          gap: 20px;
+        }
+
+        .spinner {
+          width: 50px;
+          height: 50px;
+          border: 4px solid #f3f4f6;
+          border-top: 4px solid #3498db;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        .message {
+          padding: 16px 24px;
+          margin: 0 40px 24px;
+          border-radius: 8px;
+          font-weight: 500;
+          animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .message.success {
+          background-color: #d4edda;
+          color: #155724;
+          border-left: 4px solid #28a745;
+        }
+
+        .message.error {
+          background-color: #f8d7da;
+          color: #721c24;
+          border-left: 4px solid #dc3545;
+        }
+
+        .table-container {
+          margin: 0 40px;
+          background: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          overflow: hidden;
+        }
+
+        .table-actions {
+          display: flex;
+          gap: 16px;
+          padding: 24px;
+          background: #f8f9fa;
+          border-bottom: 1px solid #e9ecef;
+          flex-wrap: wrap;
+        }
+
+        .search-box {
+          flex: 1;
+          min-width: 300px;
+        }
+
+        .filter-options {
+          min-width: 200px;
+        }
+
+        .form-control,
+        .form-select {
+          width: 100%;
+          padding: 12px 16px;
+          border: 1px solid #dce1e8;
+          border-radius: 8px;
+          font-size: 14px;
+          transition: all 0.3s ease;
+          background-color: #ffffff;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+          outline: none;
+          border-color: #3498db;
+          box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-control::placeholder {
+          color: #95a5a6;
+        }
+
+        .table-wrapper {
+          overflow-x: auto;
+          max-height: calc(100vh - 350px);
+          position: relative;
+        }
+
+        .table {
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 0;
+          font-size: 14px;
+        }
+
+        .table thead {
+          position: sticky;
+          top: 0;
+          z-index: 10;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .table thead th {
+          padding: 16px 12px;
+          text-align: left;
+          font-weight: 600;
+          font-size: 13px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: #ffffff;
+          white-space: nowrap;
+          border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .table thead th:first-child {
+          padding-left: 24px;
+        }
+
+        .table thead th:last-child {
+          padding-right: 24px;
+        }
+
+        .table tbody tr {
+          background-color: #ffffff;
+          transition: all 0.2s ease;
+        }
+
+        .table tbody tr:nth-child(even) {
+          background-color: #f8f9fa;
+        }
+
+        .table tbody tr:hover {
+          background-color: #e3f2fd;
+          transform: scale(1.001);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .table tbody td {
+          padding: 14px 12px;
+          border-bottom: 1px solid #e9ecef;
+          color: #495057;
+          vertical-align: middle;
+        }
+
+        .table tbody td:first-child {
+          padding-left: 24px;
+          font-weight: 600;
+          color: #6c757d;
+        }
+
+        .table tbody td:last-child {
+          padding-right: 24px;
+        }
+
+        .table tbody tr:last-child td {
+          border-bottom: none;
+        }
+
+        .btn {
+          padding: 8px 16px;
+          border: none;
+          border-radius: 6px;
+          font-size: 13px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: #ffffff;
+        }
+
+        .btn-secondary {
+          background-color: #6c757d;
+          color: #ffffff;
+        }
+
+        .btn-info {
+          background-color: #3498db;
+          color: #ffffff;
+        }
+
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0, 0, 0, 0.6);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+          animation: fadeIn 0.3s ease;
+          padding: 20px;
+          overflow-y: auto;
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        .modal-content {
+          background: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+          width: 100%;
+          max-width: 900px;
+          max-height: 90vh;
+          overflow-y: auto;
+          animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .modal-content h2 {
+          padding: 24px 32px;
+          margin: 0;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: #ffffff;
+          font-size: 24px;
+          font-weight: 600;
+          border-radius: 12px 12px 0 0;
+        }
+
+        .form-container {
+          padding: 32px;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 20px;
+        }
+
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .form-group label {
+          font-size: 14px;
+          font-weight: 600;
+          color: #495057;
+        }
+
+        .form-group input,
+        .form-group select {
+          padding: 12px 16px;
+          border: 1px solid #dce1e8;
+          border-radius: 8px;
+          font-size: 14px;
+          transition: all 0.3s ease;
+          background-color: #ffffff;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+          outline: none;
+          border-color: #3498db;
+          box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-actions {
+          grid-column: 1 / -1;
+          display: flex;
+          gap: 12px;
+          justify-content: flex-end;
+          padding-top: 16px;
+          border-top: 1px solid #e9ecef;
+          margin-top: 8px;
+        }
+
+        .department-summary {
+          background: #f8f9fa;
+          border: 1px solid #e9ecef;
+          border-radius: 8px;
+          padding: 15px;
+          min-width: 220px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .department-summary h3 {
+          margin: 0 0 12px 0;
+          font-size: 1rem;
+          color: #495057;
+          font-weight: 600;
+          border-bottom: 1px solid #dee2e6;
+          padding-bottom: 8px;
+        }
+
+        .department-stats {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .department-stat-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 8px 10px;
+          border-radius: 6px;
+          transition: all 0.2s ease;
+        }
+
+        .department-stat-item.active {
+          background: #006600;
+          color: white;
+        }
+
+        .department-stat-item.total {
+          background: #e7f3ff;
+          border: 1px solid #b3d9ff;
+          cursor: pointer;
+          margin-top: 5px;
+        }
+
+        .department-stat-item.total:hover {
+          background: #d4e9ff;
+          transform: translateY(-1px);
+        }
+
+        .dept-name {
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: #6c757d;
+        }
+
+        .department-stat-item.active .dept-name {
+          color: white;
+          font-weight: 600;
+        }
+
+        .department-stat-item.total .dept-name {
+          color: #0066cc;
+          font-weight: 500;
+        }
+
+        .dept-count {
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: #495057;
+          background: #e9ecef;
+          padding: 4px 10px;
+          border-radius: 15px;
+        }
+
+        .department-stat-item.active .dept-count {
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+        }
+
+        .department-stat-item.total .dept-count {
+          background: #0066cc;
+          color: white;
+          font-size: 0.8rem;
+        }
+
+        .active-filter {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 8px;
+          padding: 8px 12px;
+          background: #e7f3ff;
+          border: 1px solid #b3d9ff;
+          border-radius: 4px;
+          font-size: 0.9rem;
+        }
+
+        .clear-filter-btn {
+          background: #ff6b6b;
+          color: white;
+          border: none;
+          border-radius: 12px;
+          padding: 2px 8px;
+          font-size: 0.8rem;
+          cursor: pointer;
+          transition: background 0.2s ease;
+        }
+
+        .clear-filter-btn:hover {
+          background: #ff5252;
+        }
+
+        @media (max-width: 768px) {
+          .page-header {
+            flex-direction: column;
+          }
+
+          .form-container {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
     </div>
   );
 }

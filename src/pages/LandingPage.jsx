@@ -36,8 +36,8 @@ export default function LandingPage() {
               Leading with Excellence, Serving with Dedication
             </p>
             <p className="hero-description">
-              Our commitment is to provide efficient staff management and ensure
-              excellence in public service delivery across all departments.
+              As commissioned by Hon. Isah Miqdad AD Saude, we are dedicated to
+              delivering exceptional service.
             </p>
             <div className="hero-actions"></div>
           </div>
