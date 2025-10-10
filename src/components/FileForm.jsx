@@ -12,7 +12,15 @@ export default function FileForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const departments = ["Personnel", "PHCC", "ESSD", "Agric", "WATSAN", "Works"];
+  const departments = [
+    "Personnel",
+    "PHCC",
+    "ESSD",
+    "Agric",
+    "WATSAN",
+    "Works",
+    "Treasury",
+  ];
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -66,7 +74,7 @@ export default function FileForm() {
 
   return (
     <div className="form-container">
-      <h2 className="form-title">Add New File Record</h2>
+      <h2 className="form-title">Upload New File Record</h2>
 
       {error && <div className="error-message">{error}</div>}
 
@@ -121,13 +129,13 @@ export default function FileForm() {
           />
         </div>
 
-        <div className="form-group">
+        {/* <div className="form-group">
           <label>Upload Document (.docx)</label>
           <input type="file" accept=".docx" onChange={handleFileChange} />
-        </div>
+        </div> */}
 
         <div className="form-actions">
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={loading} style={{ width: "100%" }}>
             {loading ? "Saving..." : "Save Record"}
           </button>
         </div>

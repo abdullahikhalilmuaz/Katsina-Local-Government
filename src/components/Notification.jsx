@@ -94,8 +94,12 @@ export default function Notifications() {
     <div>
       <div className="page-header">
         <h1 className="page-title">Notifications Management</h1>
-        <button className="btn btn-primary" onClick={() => setShowForm(true)}>
-          + Add New Notification
+        <button
+          className="btn btn-primary"
+          onClick={() => setShowForm(true)}
+          style={{ width: "140px", fontSize: "13px", fontWeight: "bolder" }}
+        >
+          + Add New
         </button>
       </div>
 
@@ -197,15 +201,7 @@ export default function Notifications() {
 
       {/* Notifications List */}
       <div className="table-container">
-        <div className="table-actions">
-          <div className="search-box">
-            <input
-              type="text"
-              placeholder="Search notifications..."
-              className="form-control"
-            />
-          </div>
-        </div>
+        <div className="table-actions" style={{ margin: "20px 0" }}></div>
 
         <div className="table-wrapper">
           <table className="table">
