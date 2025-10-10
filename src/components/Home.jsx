@@ -30,7 +30,7 @@ export default function Home() {
 
       // Fetch recent activities
       const activitiesResponse = await fetch(
-        "https://katsina-local-government-server-base-url.onrender.com/api/dashboard/recent"
+        "http://localhost:3000/api/dashboard/recent"
       );
       const activitiesData = await activitiesResponse.json();
       setRecentActivities(activitiesData.activities);
@@ -48,10 +48,22 @@ export default function Home() {
     }
   };
 
-  // Format date for display
+  // Format date for display - handles "No date" and invalid dates
   const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "short", day: "numeric" };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    if (!dateString || dateString === "No date") {
+      return "No date";
+    }
+
+    try {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) {
+        return "Invalid date";
+      }
+      const options = { year: "numeric", month: "short", day: "numeric" };
+      return date.toLocaleDateString(undefined, options);
+    } catch (error) {
+      return "Date error";
+    }
   };
 
   // Get status badge class based on status

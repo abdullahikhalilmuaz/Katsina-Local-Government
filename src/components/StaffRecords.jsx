@@ -231,6 +231,7 @@ export default function StaffRecords() {
               <option value="PHCC">PHCC</option>
               <option value="ESSD">ESSD</option>
               <option value="Agric">Agric</option>
+              <option value="Treasury">Treasury</option>
               <option value="WATSAN">WATSAN</option>
               <option value="Works">Works</option>
             </select>
@@ -408,6 +409,7 @@ export default function StaffRecords() {
                   <option value="PHCC">PHCC</option>
                   <option value="ESSD">ESSD</option>
                   <option value="Agric">Agric</option>
+                  <option value="Treasury">Treasury</option>
                   <option value="WATSAN">WATSAN</option>
                   <option value="Works">Works</option>
                 </select>

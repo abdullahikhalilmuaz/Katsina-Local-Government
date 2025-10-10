@@ -43,6 +43,7 @@ export default function LandingPage() {
           </div>
 
           <div className="hero-image">
+            <h1 className="commisioning-title-name">COMMISSIONED BY:</h1>
             <div className="image-container">
               <div className="image-wrapper">
                 {/* Replace with actual commissioner image */}
@@ -58,7 +59,7 @@ export default function LandingPage() {
                 <h3 className="commissioner-name">Hon. Isah Miqdad AD Saude</h3>
                 <p className="commissioner-title">Executive Chairman</p>
                 <p className="commissioner-department">
-                  Katsina Local Government Council
+                  Katsina Local Government Area Council
                 </p>
               </div>
             </div>

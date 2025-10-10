@@ -168,6 +168,7 @@ export default function Notifications() {
                   <option value="PHCC">PHCC Department</option>
                   <option value="ESSD">ESSD Department</option>
                   <option value="Agric">Agric Department</option>
+                  <option value="Treasury">Treasury Department</option>
                   <option value="WATSAN">WATSAN Department</option>
                   <option value="Works">Works Department</option>
                 </select>
