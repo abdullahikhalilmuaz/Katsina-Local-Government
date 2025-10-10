@@ -30,7 +30,7 @@ export default function Home() {
 
       // Fetch recent activities
       const activitiesResponse = await fetch(
-        "http://localhost:3000/api/dashboard/recent"
+        "https://katsina-local-government-server-base-url.onrender.com//api/dashboard/recent"
       );
       const activitiesData = await activitiesResponse.json();
       setRecentActivities(activitiesData.activities);
