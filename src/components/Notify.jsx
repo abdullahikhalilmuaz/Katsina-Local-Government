@@ -181,7 +181,7 @@ export default function Notify() {
           </select>
         </div>
 
-        <div className="filter-group">
+        {/* <div className="filter-group">
           <select
             className="filter-select"
             value={filterTarget}
@@ -196,7 +196,7 @@ export default function Notify() {
             <option value="WATSAN">WATSAN</option>
             <option value="Works">Works</option>
           </select>
-        </div>
+        </div> */}
       </div>
 
       {/* Notifications List */}
